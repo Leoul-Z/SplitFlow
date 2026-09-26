@@ -12,9 +12,11 @@ class Group(models.Model):
 
 class Membership(models.Model):
     ROLE_CHOICE=[('admin', 'Admin'), ('member', 'Member')]
+    STATUS_CHOICE=[('accepted', 'Accepted'), ('pending', 'Pending')]
     group= models.ForeignKey(Group, related_name="memberships", on_delete=models.CASCADE)
     user= models.ForeignKey(User, related_name='memberships', on_delete=models.CASCADE)
     role=models.CharField(max_length=10, choices=ROLE_CHOICE, default='member')
+    status=models.CharField(max_length=10, choices=STATUS_CHOICE, default='pending')
     joined_at= models.DateTimeField(auto_now_add=True)
 
     class Meta:
